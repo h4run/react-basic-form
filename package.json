@@ -1,6 +1,6 @@
 {
   "name": "react-basic-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React form builder",
   "main": "dist/index.js",
   "scripts": {
@@ -13,11 +13,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h4run/react-form.git"
+    "url": "git+https://github.com/h4run/react-basic-form.git"
   },
-  "homepage": "https://github.com/h4run/react-form#readme",
+  "homepage": "https://github.com/h4run/react-basic-form#readme",
   "bugs": {
-    "url": "https://github.com/h4run/react-form/issues"
+    "url": "https://github.com/h4run/react-basic-form/issues"
   },
   "author": "Harun Memiş <harunn.memis@gmail.com>",
   "license": "MIT",
