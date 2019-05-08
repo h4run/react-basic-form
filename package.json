@@ -1,0 +1,66 @@
+{
+  "name": "react-basic-form",
+  "version": "1.0.0",
+  "description": "React form builder",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development",
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production",
+    "publish-demo": "npm run build && npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h4run/react-form.git"
+  },
+  "homepage": "https://github.com/h4run/react-form#readme",
+  "bugs": {
+    "url": "https://github.com/h4run/react-form/issues"
+  },
+  "author": "Harun Memiş <harunn.memis@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "form",
+    "form-builder",
+    "react-simple-form",
+    "react-basic-form",
+    "react",
+    "component",
+    "react-component",
+    "react-form"
+  ],
+  "peerDependencies": {
+    "react": ">=15",
+    "react-dom": ">=15"
+  },
+  "dependencies": {
+    "@rebass/grid": "^6.0.0",
+    "styled-components": "^4.2.0",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "8.0.5",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0",
+    "html-webpack-plugin": "^3.2.0",
+    "prettier-eslint": "^8.8.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
