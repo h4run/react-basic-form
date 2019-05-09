@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getFormElements, Context } from './utils';
+import { getFormNames, Context } from './utils';
 
 class Form extends React.Component {
   state = {
@@ -19,10 +19,13 @@ class Form extends React.Component {
 
     const { onSubmit } = this.props;
     const form = e.target;
-    const formElements = getFormElements(form);
+    const names = getFormNames(form);
 
-    if (this.isValidAll(formElements)) {
-      const data = formElements.map(({ name, value }) => ({ name, value }));
+    if (this.isValidAll(form, names)) {
+      const data = names.map(({ name }) => ({
+        name,
+        value: form.elements[name].value,
+      }));
 
       if (onSubmit) {
         onSubmit(data);
@@ -38,13 +41,16 @@ class Form extends React.Component {
     if (this.hasError(name)) return <div className="error-message">{errorMessage}</div>;
   };
 
-  isValidAll(formElements) {
-    return formElements.reduce((isValid, element) => {
+  isValidAll(form, names) {
+    return names.reduce((isValid, name) => {
+      const element = form.elements[name];
       const formElement = element.length > 0 && !element.nodeName ? element[0] : element;
+
+      // TODO: radiobox bug will be fixed.
 
       return (
         this.isValid({
-          name: element.name,
+          name,
           value: element.value,
           required: formElement.required,
         }) && isValid
@@ -93,7 +99,12 @@ class Form extends React.Component {
 
   render() {
     const {
-      children, errorMessages, validations, onSubmit, ...props
+      children,
+      errorMessages,
+      validations,
+      onSubmit,
+      defaultErrorMessage,
+      ...props
     } = this.props;
 
     const contextProps = {

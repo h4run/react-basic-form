@@ -19,7 +19,29 @@ const Example1 = () => (
   >
     <Form.Element label="Ad Soyad" name="fullname" required />
     <Form.Element label="E-posta" name="email" type="email" required />
-    <Form.Element label="Cinsiyet" name="cinsiyet" type="radio" required />
+    <Form.Element
+      label="Cinsiyet"
+      name="cinsiyet"
+      type="radio"
+      options={[{ label: 'Erkek', value: 'm' }, { label: 'Kadın', value: 'f' }]}
+      required
+    />
+    <Form.Element
+      label="Sevdiğin Renkler"
+      name="yourcolors"
+      type="checkbox"
+      options={['Blue', 'Red', 'Green', 'Yellow']}
+      // defaultValue={['Blue', 'Green']}
+      required
+    />
+    <Form.Element
+      label="Hobilerin"
+      name="yourcolors"
+      type="checkbox"
+      options={['Sinema', 'Futbol']}
+      // defaultValue="Sinema"
+      required
+    />
     <Form.Element label="T.C. Kimlik No" name="idnumber" required />
     <Form.Element label="İl" name="city" type="select" options={['İSTANBUL', 'ANKARA']} required />
     <Form.Element label="Telefon" name="phone" required />

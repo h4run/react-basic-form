@@ -74,8 +74,12 @@ button[type='submit'] {
   }
 
   .inline-items {
-    .item-wrap {
-      margin-top: 15px;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    color: #aaa;
+    .item-wrap + .item-wrap {
+      margin-left: 35px;
     }
     .item {
       top: 1px;

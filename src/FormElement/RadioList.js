@@ -7,21 +7,32 @@ const RadioList = ({
 
   return (
     <div id={id} className="inline-items">
-      {options.map(({ label, value }) => (
-        <span className="item-wrap" key={label}>
-          <label className={`${props.type} item`}>
-            {label}
-            <input
-              {...props}
-              value={value}
-              defaultChecked={
-                Array.isArray(defaultValue) ? defaultValue.includes(value) : defaultValue === value
-              }
-            />
-            <span className="checkmark" />
-          </label>
-        </span>
-      ))}
+      {options.map((opt) => {
+        let label = opt;
+        let value = opt;
+        if (typeof opt === 'object') {
+          label = opt.label;
+          value = opt.value;
+        }
+
+        return (
+          <span className="item-wrap" key={label}>
+            <label className={`${props.type} item`}>
+              {label}
+              <input
+                {...props}
+                value={value}
+                defaultChecked={
+                  Array.isArray(defaultValue)
+                    ? defaultValue.includes(value)
+                    : defaultValue === value
+                }
+              />
+              <span className="checkmark" />
+            </label>
+          </span>
+        );
+      })}
     </div>
   );
 };

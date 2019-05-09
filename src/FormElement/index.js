@@ -52,7 +52,6 @@ class FormElement extends React.Component {
     const { showErrorMessage } = this.context;
 
     if (children && typeof children === 'function') return children(this.context);
-
     return (
       <div className={`form-element ${className || ''}`}>
         {label && <label htmlFor={`input_${name}`}>{label}</label>}

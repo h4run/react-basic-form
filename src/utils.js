@@ -7,7 +7,6 @@ export const getFormNames = form => uniqueArray(
     .map(({ name }) => name)
     .filter(name => name),
 );
-export const getFormElements = form => getFormNames(form).map(name => form.elements[name]);
 
 export const Context = React.createContext();
 
