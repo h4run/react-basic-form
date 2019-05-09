@@ -97,6 +97,7 @@ const renderForm = ({ showErrorMessage, onChange }) => {
 
 const Sample = () => (
   <Form
+    onSubmit={data => console.log(data)}
     render={renderForm}
     validations={{
       cellphone: value => isMobilePhone(value, 'tr-TR'),

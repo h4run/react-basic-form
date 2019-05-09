@@ -17,13 +17,16 @@ class Form extends React.Component {
   _handleSubmit = (e) => {
     e.preventDefault();
 
+    const { onSubmit } = this.props;
     const form = e.target;
     const formElements = getFormElements(form);
 
     if (this.isValidAll(formElements)) {
       const data = formElements.map(({ name, value }) => ({ name, value }));
 
-      console.log(data);
+      if (onSubmit) {
+        onSubmit(data);
+      }
 
       form.reset();
     }
