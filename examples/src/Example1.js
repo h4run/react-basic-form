@@ -36,7 +36,7 @@ const Example1 = () => (
     />
     <Form.Element
       label="Hobilerin"
-      name="yourcolors"
+      name="hobbies"
       type="checkbox"
       options={['Sinema', 'Futbol']}
       // defaultValue="Sinema"

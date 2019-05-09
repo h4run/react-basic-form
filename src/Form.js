@@ -9,7 +9,8 @@ class Form extends React.Component {
 
   _handleChange = (e) => {
     const { name, value, required } = e.target;
-    if (this.hasError(name)) {
+
+    if (this.hasError(this.nameClean(name))) {
       this.isValid({ name, value, required });
     }
   };
@@ -22,7 +23,7 @@ class Form extends React.Component {
     const names = getFormNames(form);
 
     if (this.isValidAll(form, names)) {
-      const data = names.map(({ name }) => ({
+      const data = names.map(name => ({
         name,
         value: form.elements[name].value,
       }));
@@ -37,16 +38,17 @@ class Form extends React.Component {
 
   _showErrorMessage = (name) => {
     const { errorMessages, defaultErrorMessage } = this.props;
+
     const errorMessage = errorMessages[name] || defaultErrorMessage;
     if (this.hasError(name)) return <div className="error-message">{errorMessage}</div>;
   };
+
+  nameClean = name => name.replace(/\[\]$/, ''); // name[] (checkboxes)
 
   isValidAll(form, names) {
     return names.reduce((isValid, name) => {
       const element = form.elements[name];
       const formElement = element.length > 0 && !element.nodeName ? element[0] : element;
-
-      // TODO: radiobox bug will be fixed.
 
       return (
         this.isValid({
@@ -76,6 +78,8 @@ class Form extends React.Component {
   }
 
   isValid({ name, value, required }) {
+    const _name = this.nameClean(name);
+
     const { validations } = this.props;
     let defaultFieldIsValid = true;
 
@@ -85,14 +89,14 @@ class Form extends React.Component {
 
     let customFieldIsValid = true;
 
-    if ((required || value) && validations[name]) {
-      customFieldIsValid = validations[name](value);
+    if ((required || value) && validations[_name]) {
+      customFieldIsValid = validations[_name](value);
     }
 
     const isValid = defaultFieldIsValid && customFieldIsValid;
 
-    if (isValid) this.removeError(name);
-    else this.addError(name);
+    if (isValid) this.removeError(_name);
+    else this.addError(_name);
 
     return isValid;
   }
