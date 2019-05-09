@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getFormElements } from './utils';
+import { getFormElements, Context } from './utils';
 
 class Form extends React.Component {
   state = {
@@ -92,25 +92,25 @@ class Form extends React.Component {
   }
 
   render() {
-    const {
-      render, children, className, submitLabel,
-    } = this.props;
+    const { render, children, className } = this.props;
+
+    const props = {
+      showErrorMessage: this._showErrorMessage,
+      onChange: this._handleChange,
+    };
+
     return (
-      <form className={`react-basic-form ${className}`} onSubmit={this._handleSubmit} noValidate>
-        {render
-          && render({
-            showErrorMessage: this._showErrorMessage,
-            onChange: this._handleChange,
-          })}
-        {children}
-        <button type="submit">{submitLabel}</button>
-      </form>
+      <Context.Provider value={{ ...props }}>
+        <form className={`react-basic-form ${className}`} onSubmit={this._handleSubmit} noValidate>
+          {render && render(props)}
+          {children}
+        </form>
+      </Context.Provider>
     );
   }
 }
 
 Form.defaultProps = {
-  submitLabel: 'Submit',
   errorMessages: {},
   validations: {},
   defaultErrorMessage: 'This field is required.',

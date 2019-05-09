@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const uniqueArray = arr => [...new Set(arr)];
 
 export const getFormNames = form => uniqueArray(
@@ -6,5 +8,7 @@ export const getFormNames = form => uniqueArray(
     .filter(name => name),
 );
 export const getFormElements = form => getFormNames(form).map(name => form.elements[name]);
+
+export const Context = React.createContext();
 
 export default {};

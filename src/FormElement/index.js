@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Context } from '../utils';
+
 import RadioList from './RadioList';
 import CheckboxList from './CheckboxList';
 import Select from './Select';
@@ -7,11 +9,15 @@ import Textarea from './Textarea';
 import Input from './Input';
 
 class FormElement extends React.Component {
+  static contextType = Context;
+
   renderInput() {
     const { options, name, type } = this.props;
     const { label, showErrorMessage, ...fieldProps } = this.props;
+    const { onChange } = this.context;
     const props = {
       ...fieldProps,
+      onChange,
       id: `input_${name}`,
     };
 
@@ -40,15 +46,14 @@ class FormElement extends React.Component {
   }
 
   render() {
-    const {
-      label, name, showErrorMessage, className,
-    } = this.props;
+    const { label, name, className } = this.props;
+    const { showErrorMessage } = this.context;
 
     return (
       <div className={`form-element ${className}`}>
         {label && <label htmlFor={`input_${name}`}>{label}</label>}
         <div className="input-wrap">{this.renderInput()}</div>
-        {showErrorMessage && showErrorMessage(name)}
+        {showErrorMessage(name)}
       </div>
     );
   }
