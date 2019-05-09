@@ -92,9 +92,11 @@ class Form extends React.Component {
   }
 
   render() {
-    const { render, children, submitLabel } = this.props;
+    const {
+      render, children, className, submitLabel,
+    } = this.props;
     return (
-      <form onSubmit={this._handleSubmit} noValidate>
+      <form className={`react-basic-form ${className}`} onSubmit={this._handleSubmit} noValidate>
         {render
           && render({
             showErrorMessage: this._showErrorMessage,

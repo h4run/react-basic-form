@@ -30,4 +30,6 @@ export const isTCNumber = (value) => {
   return true;
 };
 
-export default {};
+export const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+export const mobilePhoneTurkeyRegex = /^(\+?90|0)?5\d{9}$/;
