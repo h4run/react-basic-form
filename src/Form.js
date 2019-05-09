@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { isEmail, isMobilePhone } from 'validator';
-import { getFormElements, isTCNumber } from './utils';
+import { getFormElements } from './utils';
 
 class Form extends React.Component {
   state = {
@@ -68,6 +67,7 @@ class Form extends React.Component {
   }
 
   isValid({ name, value, required }) {
+    const { validations } = this.props;
     let defaultFieldIsValid = true;
 
     if (required) {
@@ -75,33 +75,9 @@ class Form extends React.Component {
     }
 
     let customFieldIsValid = true;
-    let message;
 
-    if (required || value) {
-      switch (name) {
-        case 'cellphone':
-          customFieldIsValid = isMobilePhone(value, 'tr-TR');
-          break;
-        case 'email':
-          customFieldIsValid = isEmail(value, { allow_utf8_local_part: false });
-          break;
-        case 'idnumber':
-          customFieldIsValid = isTCNumber(value);
-          break;
-        case 'password':
-          if (!value || value.length < 8) {
-            message = 'Şifreniz en az 8 karakter olmalıdır.';
-            customFieldIsValid = false;
-            break;
-          } else if (!value.match(/((?=.*[a-zA-Z]))(?=(.*\d){1,})^.*$/)) {
-            message = 'Şifrenizde en az bir rakam ve bir harf bulunmalıdır.';
-            customFieldIsValid = false;
-            break;
-          }
-          break;
-        default:
-          customFieldIsValid = true;
-      }
+    if ((required || value) && validations[name]) {
+      customFieldIsValid = validations[name](value);
     }
 
     const isValid = defaultFieldIsValid && customFieldIsValid;
@@ -129,9 +105,10 @@ class Form extends React.Component {
 }
 
 Form.defaultProps = {
-  submitLabel: 'Gönder',
+  submitLabel: 'Submit',
   errorMessages: {},
-  defaultErrorMessage: 'Bu alan doldurulması zorunludur.',
+  validations: {},
+  defaultErrorMessage: 'This field is required.',
 };
 
 export default Form;

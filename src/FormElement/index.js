@@ -9,8 +9,9 @@ import Input from './Input';
 class FormElement extends React.Component {
   renderInput() {
     const { options, name, type } = this.props;
+    const { label, showErrorMessage, ...fieldProps } = this.props;
     const props = {
-      ...this.props,
+      ...fieldProps,
       id: `input_${name}`,
     };
 

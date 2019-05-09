@@ -1,5 +1,7 @@
 import React from 'react';
 import { Flex, Box } from '@rebass/grid';
+import { isEmail, isMobilePhone } from 'validator';
+import { isTCNumber } from './utils';
 
 import Form from '../../src';
 
@@ -96,9 +98,15 @@ const renderForm = ({ showErrorMessage, onChange }) => {
 const Sample = () => (
   <Form
     render={renderForm}
+    validations={{
+      cellphone: value => isMobilePhone(value, 'tr-TR'),
+      email: value => isEmail(value, { allow_utf8_local_part: false }),
+      idnumber: value => isTCNumber(value),
+    }}
     errorMessages={{
       phone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
       email: 'Lütfen e-posta adresinizi kontrol ediniz.',
+      idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
     }}
   />
 );
