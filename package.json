@@ -32,8 +32,8 @@
     "react-form"
   ],
   "peerDependencies": {
-    "react": ">=15",
-    "react-dom": ">=15"
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "dependencies": {},
   "devDependencies": {
