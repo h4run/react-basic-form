@@ -92,7 +92,9 @@ class Form extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const {
+      children, errorMessages, validations, onSubmit, ...props
+    } = this.props;
 
     const contextProps = {
       showErrorMessage: this._showErrorMessage,
@@ -100,7 +102,7 @@ class Form extends React.Component {
     };
     return (
       <Context.Provider value={contextProps}>
-        <form onSubmit={this._handleSubmit} noValidate>
+        <form onSubmit={this._handleSubmit} noValidate {...props}>
           {typeof children === 'function' ? children(contextProps) : children}
         </form>
       </Context.Provider>

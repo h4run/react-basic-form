@@ -54,7 +54,7 @@ class FormElement extends React.Component {
     if (children && typeof children === 'function') return children(this.context);
 
     return (
-      <div className={`form-element ${className}`}>
+      <div className={`form-element ${className || ''}`}>
         {label && <label htmlFor={`input_${name}`}>{label}</label>}
         <div className="input-wrap">{this.renderInput()}</div>
         {showErrorMessage(name)}

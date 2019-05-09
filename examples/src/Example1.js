@@ -7,12 +7,12 @@ const Example1 = () => (
   <Form
     onSubmit={data => console.log(data)}
     validations={{
-      cellphone: value => mobilePhoneTurkeyRegex.test(value),
+      phone: value => mobilePhoneTurkeyRegex.test(value),
       email: value => emailRegex.test(value),
       idnumber: value => isTCNumber(value),
     }}
     errorMessages={{
-      cellphone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
+      phone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
       email: 'Lütfen e-posta adresinizi kontrol ediniz.',
       idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
     }}
@@ -22,7 +22,7 @@ const Example1 = () => (
     <Form.Element label="Cinsiyet" name="cinsiyet" type="radio" required />
     <Form.Element label="T.C. Kimlik No" name="idnumber" required />
     <Form.Element label="İl" name="city" type="select" options={['İSTANBUL', 'ANKARA']} required />
-    <Form.Element label="Telefon" name="cellphone" required />
+    <Form.Element label="Telefon" name="phone" required />
     <button type="submit">Submit</button>
   </Form>
 );
