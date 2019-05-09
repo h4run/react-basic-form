@@ -46,8 +46,12 @@ class FormElement extends React.Component {
   }
 
   render() {
-    const { label, name, className } = this.props;
+    const {
+      label, name, className, children,
+    } = this.props;
     const { showErrorMessage } = this.context;
+
+    if (children && typeof children === 'function') return children(this.context);
 
     return (
       <div className={`form-element ${className}`}>

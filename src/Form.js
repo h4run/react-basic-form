@@ -92,18 +92,16 @@ class Form extends React.Component {
   }
 
   render() {
-    const { render, children, className } = this.props;
+    const { children } = this.props;
 
-    const props = {
+    const contextProps = {
       showErrorMessage: this._showErrorMessage,
       onChange: this._handleChange,
     };
-
     return (
-      <Context.Provider value={{ ...props }}>
-        <form className={`react-basic-form ${className}`} onSubmit={this._handleSubmit} noValidate>
-          {render && render(props)}
-          {children}
+      <Context.Provider value={contextProps}>
+        <form onSubmit={this._handleSubmit} noValidate>
+          {typeof children === 'function' ? children(contextProps) : children}
         </form>
       </Context.Provider>
     );

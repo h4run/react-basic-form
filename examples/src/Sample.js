@@ -8,15 +8,6 @@ import '../../src/css/example.scss';
 const Sample = () => (
   <Form
     onSubmit={data => console.log(data)}
-    render={({ showErrorMessage, onChange }) => (
-      <>
-        <div className="form-element">
-          <label>Ad</label>
-          <input name="name" type="text" onChange={onChange} required />
-          {showErrorMessage('name')}
-        </div>
-      </>
-    )}
     validations={{
       cellphone: value => mobilePhoneTurkeyRegex.test(value),
       email: value => emailRegex.test(value),
@@ -28,8 +19,19 @@ const Sample = () => (
       idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
     }}
   >
+    <Form.Element>
+      {({ showErrorMessage, onChange }) => (
+        <div className="form-element">
+          <label>Ad</label>
+          <input name="name" type="text" onChange={onChange} required />
+          {showErrorMessage('name')}
+        </div>
+      )}
+    </Form.Element>
+
     <Form.Element label="Soyad" name="surname" required />
     <Form.Element label="E-posta" name="email" type="email" required />
+    <Form.Element label="Cinsiyet" name="cinsiyet" type="radio" required />
     <Form.Element label="T.C. Kimlik No" name="idnumber" required />
     <Form.Element label="Adres" name="address" type="textarea" rows="10" required />
     <Form.Element label="Posta Kodu" name="postcode" required />
