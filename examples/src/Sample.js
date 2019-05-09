@@ -105,7 +105,7 @@ const Sample = () => (
       idnumber: value => isTCNumber(value),
     }}
     errorMessages={{
-      phone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
+      cellphone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
       email: 'Lütfen e-posta adresinizi kontrol ediniz.',
       idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
     }}
