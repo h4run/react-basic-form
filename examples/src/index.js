@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import './example.scss';
+import '../../src/style.scss';
 
 import Example1 from './Example1';
 import Example2 from './Example2';

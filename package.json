@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
     "transpileJS": "babel src -d dist --copy-files",
-    "transpileCSS": "node-sass --output-style compressed examples/src/example.scss > dist/example.css",
+    "transpileCSS": "node-sass --output-style compressed src/style.scss > dist/style.css",
     "transpile": "yarn transpileJS && yarn transpileCSS",
     "prepublishOnly": "yarn transpile",
     "build": "webpack --mode production"

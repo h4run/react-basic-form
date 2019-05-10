@@ -108,6 +108,7 @@ class Form extends React.Component {
       validations,
       onSubmit,
       defaultErrorMessage,
+      className,
       ...props
     } = this.props;
 
@@ -117,7 +118,12 @@ class Form extends React.Component {
     };
     return (
       <Context.Provider value={contextProps}>
-        <form onSubmit={this._handleSubmit} noValidate {...props}>
+        <form
+          onSubmit={this._handleSubmit}
+          noValidate
+          className={`react-basic-form ${className || ''}`}
+          {...props}
+        >
           {typeof children === 'function' ? children(contextProps) : children}
         </form>
       </Context.Provider>
