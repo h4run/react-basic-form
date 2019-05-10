@@ -5,3 +5,4 @@ examples
 webpack.config.js
 .DS_Store
 .eslintrc.js
+dist/style.scss
