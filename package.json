@@ -1,15 +1,16 @@
 {
   "name": "react-basic-form",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React form builder",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "transpile": "babel src -d dist --copy-files",
-    "prepublishOnly": "npm run transpile",
-    "build": "webpack --mode production",
-    "publish-demo": "npm run build && npm run deploy"
+    "transpileJS": "babel src -d dist --copy-files",
+    "transpileCSS": "node-sass --output-style compressed examples/src/example.scss > dist/example.css",
+    "transpile": "yarn transpileJS && yarn transpileCSS",
+    "prepublishOnly": "yarn transpile",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
