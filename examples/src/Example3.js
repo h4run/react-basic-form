@@ -4,7 +4,7 @@ import Form from '../../src';
 
 const Example2 = () => (
   <Form onSubmit={data => console.log(data)}>
-    {({ showErrorMessage, onChange }) => (
+    {({ showErrorMessage, onChange, isLoading }) => (
       <>
         <div className="form-element">
           <label>Ad</label>
@@ -16,7 +16,9 @@ const Example2 = () => (
           <input name="surname" type="text" onChange={onChange} required />
           {showErrorMessage('surname')}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isLoading}>
+          Send
+        </button>
       </>
     )}
   </Form>

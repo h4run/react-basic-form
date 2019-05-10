@@ -5,7 +5,13 @@ import Form from '../../src';
 
 const Example1 = () => (
   <Form
-    onSubmit={data => console.log(data)}
+    onSubmit={(data, submitState) => {
+      submitState.start();
+      setTimeout(() => {
+        console.log(data);
+        submitState.end();
+      }, 1000);
+    }}
     validations={{
       phone: value => mobilePhoneTurkeyRegex.test(value),
       email: value => emailRegex.test(value),
@@ -17,14 +23,15 @@ const Example1 = () => (
       idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
     }}
   >
-    <Form.Element label="Ad Soyad" name="fullname" required />
-    <Form.Element label="E-posta" name="email" type="email" required />
+    <Form.Element label="Ad Soyad" name="fullname" required={false} />
+    <Form.Element label="E-posta" name="email" type="email" required={false} />
     <Form.Element
       label="Cinsiyet"
       name="cinsiyet"
       type="radio"
       options={[{ label: 'Erkek', value: 'm' }, { label: 'Kadın', value: 'f' }]}
-      required
+      // defaultValue="m"
+      required={false}
     />
     <Form.Element
       label="Sevdiğin Renkler"
@@ -32,20 +39,19 @@ const Example1 = () => (
       type="checkbox"
       options={['Blue', 'Red', 'Green', 'Yellow']}
       // defaultValue={['Blue', 'Green']}
-      required
+      required={false}
     />
+    <Form.Element label="T.C. Kimlik No" name="idnumber" required={false} />
     <Form.Element
-      label="Hobilerin"
-      name="hobbies"
-      type="checkbox"
-      options={['Sinema', 'Futbol']}
-      // defaultValue="Sinema"
-      required
+      label="İl"
+      name="city"
+      type="select"
+      options={['İSTANBUL', 'ANKARA']}
+      required={false}
     />
-    <Form.Element label="T.C. Kimlik No" name="idnumber" required />
-    <Form.Element label="İl" name="city" type="select" options={['İSTANBUL', 'ANKARA']} required />
-    <Form.Element label="Telefon" name="phone" required />
-    <button type="submit">Submit</button>
+    <Form.Element label="Telefon" name="phone" required={false} />
+    <Form.Element label="Mesaj" name="message" type="textarea" required={false} />
+    <Form.Submit />
   </Form>
 );
 

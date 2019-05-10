@@ -1,6 +1,5 @@
 .react-basic-form {
   button[type='submit'] {
-    background-color: #666;
     color: white;
     border: none;
     font-weight: bold;
@@ -13,11 +12,14 @@
     font-size: 16px;
     padding: 0 20px;
     appearance: none;
-    background-color: #203260;
+    background-color: #aaa;
     display: block;
     width: 220px;
     height: 53px;
     border-radius: 4px;
+    &[disabled] {
+      opacity: 0.6;
+    }
     &:hover {
       text-decoration: none;
     }
@@ -38,9 +40,11 @@
     height: 53px;
     -webkit-appearance: none;
     background-color: white;
+    font-size: 16px;
   }
   textarea {
     height: auto;
+    resize: none;
   }
   select {
     padding-right: 40px;
@@ -80,69 +84,69 @@
       height: 50px;
       align-items: center;
       color: #aaa;
-      .item-wrap + .item-wrap {
+      label + label {
         margin-left: 35px;
       }
-      .item {
-        top: 1px;
-        display: inline-flex;
-        align-items: center;
-        flex-direction: row-reverse;
-        position: relative;
-        cursor: pointer;
-        user-select: none;
+    }
+  }
 
-        &.radio .checkmark {
-          border-radius: 50%;
-          &:after {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: white;
-          }
-        }
-        &.checkbox .checkmark {
-          &:after {
-            margin-top: -2px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            transform: rotate(45deg);
-          }
-        }
+  .custom-checkbox-radio {
+    top: 1px;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
 
-        .checkmark {
-          height: 24px;
-          width: 24px;
-          background-color: #ddd;
-          margin-right: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background-color 0.3s;
-          will-change: background-color;
-          &:after {
-            content: '';
-            position: absolute;
-            opacity: 0;
-            transition: opacity 0.2s;
-            will-change: opacity;
-          }
-        }
-        &:hover input ~ .checkmark {
-          background-color: #ccc;
-        }
-        input {
-          position: absolute;
-          opacity: 0;
+    &.radio .checkmark {
+      border-radius: 50%;
+      &:after {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+      }
+    }
+    &.checkbox .checkmark {
+      &:after {
+        margin-top: -2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+      }
+    }
 
-          &:checked ~ .checkmark {
-            background-color: #203260;
-            &:after {
-              opacity: 1;
-            }
-          }
+    .checkmark {
+      height: 24px;
+      width: 24px;
+      background-color: #ddd;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      will-change: background-color;
+      &:after {
+        content: '';
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.2s;
+        will-change: opacity;
+      }
+    }
+    &:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+    input {
+      opacity: 0;
+
+      &:checked ~ .checkmark {
+        background-color: #aaa;
+        &:after {
+          opacity: 1;
         }
       }
     }

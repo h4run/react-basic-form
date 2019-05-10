@@ -1,60 +1,82 @@
 import React from 'react';
+import cx from 'classnames';
 
-import { Context } from '../utils';
+import { Context, convertOptions } from '../utils';
 
-import RadioList from './RadioList';
-import CheckboxList from './CheckboxList';
+import Radio from './Radio';
+import RadioGroup from './RadioGroup';
+import Checkbox from './Checkbox';
+import CheckboxGroup from './CheckboxGroup';
 import Select from './Select';
 import Textarea from './Textarea';
 import Input from './Input';
 
+const createComponent = (type, options) => {
+  switch (type) {
+    case 'checkbox':
+      if (options) return CheckboxGroup;
+      return Checkbox;
+    case 'radio':
+      if (options) return RadioGroup;
+      return Radio;
+    case 'select':
+      return Select;
+    case 'textarea':
+      return Textarea;
+    default:
+      return Input;
+  }
+};
+
 class FormElement extends React.Component {
   static contextType = Context;
 
+  getID() {
+    const { name } = this.props;
+    return `input_${name}`;
+  }
+
   renderInput() {
-    const { options, name, type } = this.props;
+    const { options, type } = this.props;
     const { label, showErrorMessage, ...fieldProps } = this.props;
     const { onChange } = this.context;
-    const props = {
+    let props = {
       ...fieldProps,
       onChange,
-      id: `input_${name}`,
+      id: this.getID(),
     };
 
-    const arrayProps = {
-      ...props,
-      options,
-    };
-
-    const textProps = {
-      ...props,
-      autoComplete: 'off',
-    };
-
-    switch (type) {
-      case 'checkbox':
-        return <CheckboxList {...arrayProps} />;
-      case 'radio':
-        return <RadioList {...arrayProps} />;
-      case 'select':
-        return <Select {...arrayProps} />;
-      case 'textarea':
-        return <Textarea {...textProps} />;
-      default:
-        return <Input {...textProps} />;
+    if (type === 'select' || (['checkbox', 'radio'].includes(type) && options)) {
+      props = {
+        ...props,
+        options: options && convertOptions(options),
+      };
     }
+
+    if (['checkbox', 'radio'].includes(type) && !options) {
+      props = {
+        ...props,
+        label,
+      };
+    }
+
+    const InputComponent = createComponent(type, options);
+
+    return <InputComponent {...props} />;
   }
 
   render() {
     const {
-      label, name, className, children,
+      label, name, className, children, type, options,
     } = this.props;
     const { showErrorMessage } = this.context;
 
     if (children && typeof children === 'function') return children(this.context);
     return (
-      <div className={`form-element ${className || ''}`}>
-        {label && <label htmlFor={`input_${name}`}>{label}</label>}
+      <div className={cx('form-element', className)}>
+        {label && (['checkbox', 'radio'].includes(type) ? options : true) && (
+          <label htmlFor={this.getID()}>{label}</label>
+        )}
         <div className="input-wrap">{this.renderInput()}</div>
         {showErrorMessage(name)}
       </div>

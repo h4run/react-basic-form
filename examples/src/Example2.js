@@ -13,7 +13,13 @@ const Example2 = () => (
         </div>
       )}
     </Form.Element>
-    <button type="submit">Submit</button>
+    <Form.Submit>
+      {({ isLoading }) => (
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? 'Sending' : 'Send'}
+        </button>
+      )}
+    </Form.Submit>
   </Form>
 );
 

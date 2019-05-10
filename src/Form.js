@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 import { getFormNames, Context } from './utils';
 
@@ -10,29 +11,36 @@ class Form extends React.Component {
   _handleChange = (e) => {
     const { name, value, required } = e.target;
 
-    if (this.hasError(this.nameClean(name))) {
+    if (this.hasError(name)) {
       this.isValid({ name, value, required });
     }
   };
 
   _handleSubmit = (e) => {
     e.preventDefault();
+    const { isLoading } = this.state;
+    if (isLoading) return;
 
     const { onSubmit } = this.props;
     const form = e.target;
     const names = getFormNames(form);
 
+    const submitActions = {
+      start: () => {
+        this.setState({ isLoading: true });
+      },
+      end: () => {
+        form.reset();
+        this.setState({ isLoading: false });
+      },
+    };
+
     if (this.isValidAll(form, names)) {
-      const data = names.map(name => ({
-        name,
-        value: form.elements[name].value,
-      }));
+      const data = names.reduce((acc, name) => ({ ...acc, [name]: form.elements[name].value }), {});
 
       if (onSubmit) {
-        onSubmit(data);
+        onSubmit(data, submitActions);
       }
-
-      form.reset();
     }
   };
 
@@ -43,8 +51,6 @@ class Form extends React.Component {
     if (this.hasError(name)) return <div className="error-message">{errorMessage}</div>;
   };
 
-  nameClean = name => name.replace(/\[\]$/, ''); // name[] (checkboxes)
-
   isValidAll(form, names) {
     return names.reduce((isValid, name) => {
       const element = form.elements[name];
@@ -53,7 +59,7 @@ class Form extends React.Component {
       return (
         this.isValid({
           name,
-          value: element.value,
+          value: element.type === 'checkbox' ? element.checked : element.value,
           required: formElement.required,
         }) && isValid
       );
@@ -78,8 +84,6 @@ class Form extends React.Component {
   }
 
   isValid({ name, value, required }) {
-    const _name = this.nameClean(name);
-
     const { validations } = this.props;
     let defaultFieldIsValid = true;
 
@@ -89,14 +93,14 @@ class Form extends React.Component {
 
     let customFieldIsValid = true;
 
-    if ((required || value) && validations[_name]) {
-      customFieldIsValid = validations[_name](value);
+    if ((required || value) && validations[name]) {
+      customFieldIsValid = validations[name](value);
     }
 
     const isValid = defaultFieldIsValid && customFieldIsValid;
 
-    if (isValid) this.removeError(_name);
-    else this.addError(_name);
+    if (isValid) this.removeError(name);
+    else this.addError(name);
 
     return isValid;
   }
@@ -112,16 +116,19 @@ class Form extends React.Component {
       ...props
     } = this.props;
 
+    const { isLoading } = this.state;
+
     const contextProps = {
       showErrorMessage: this._showErrorMessage,
       onChange: this._handleChange,
+      isLoading,
     };
     return (
       <Context.Provider value={contextProps}>
         <form
           onSubmit={this._handleSubmit}
           noValidate
-          className={`react-basic-form ${className || ''}`}
+          className={cx('react-basic-form', className)}
           {...props}
         >
           {typeof children === 'function' ? children(contextProps) : children}

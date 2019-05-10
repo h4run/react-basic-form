@@ -9,7 +9,7 @@ import Example3 from './Example3';
 
 const App = () => (
   <>
-    <h1>Form Examples</h1>
+    <h1>Form Example</h1>
     <Example1 />
   </>
 );
