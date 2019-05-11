@@ -32,15 +32,8 @@ import Form from 'react-basic-form';
 
 render(
   <Form
-    onSubmit={(data, submitState) => {
+    onSubmit={data => {
       console.log(data);
-
-      // for async action
-      // submitState.start(); // isLoading true
-      // setTimeout(() => {
-      //   console.log(data);
-      //   submitState.end(); // form reset && isLoading = false
-      // }, 1000);
     }}
     validations={{
       email: value => emailRegex.test(value),
@@ -111,6 +104,30 @@ render(
 );
 ```
 
+### Example 4
+
+```js
+import React from 'react';
+import { render } from 'react-dom';
+import Form from 'react-basic-form';
+
+render(
+  <Form
+    onSubmit={(data, submitState) => {
+      submitState.start(); // isLoading true
+      setTimeout(() => {
+        console.log(data);
+        submitState.end(); // form reset && isLoading = false
+      }, 1000);
+    }}
+  >
+    <Form.Element label="Full Name" name="fullname" required />
+    <Form.Submit />
+  </Form>,
+  container,
+);
+```
+
 ## API
 
 ### `Form` props
@@ -127,17 +144,17 @@ render(
 
 | Name     | Type                                          | Default | Description                                                                                           |
 | -------- | --------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| options  | Array(string) or Array(shape({label, value})) |         | when if `type` prop includes `select`,`radio` or checkbox, this prop is required                      |
+| options  | Array(string) or Array(shape({label, value})) |         | when if `type` prop includes `select`,`radio` or `checkbox`, this prop is required                    |
 | label    | string                                        |         | if this filled, `Form.Element` will create `label` tag with your string.                              |
-| children | function                                      |         | if children is a function this function should return the JSX which contains the form and all inputs. |
+| children | React.Node or function                        |         | if children is a function this function should return the JSX which contains the form and all inputs. |
 
 ### `Form.Submit` props
 
-| Name         | Type     | Default     | Description                                                                                           |
-| ------------ | -------- | ----------- | ----------------------------------------------------------------------------------------------------- |
-| label        | string   | `'Send'`    |                                                                                                       |
-| loadingLabel | string   | `'Sending'` |                                                                                                       |
-| children     | function |             | if children is a function this function should return the JSX which contains the form and all inputs. |
+| Name         | Type                   | Default     | Description                                                                                           |
+| ------------ | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
+| label        | string                 | `'Send'`    |                                                                                                       |
+| loadingLabel | string                 | `'Sending'` |                                                                                                       |
+| children     | React.Node or function |             | if children is a function this function should return the JSX which contains the form and all inputs. |
 
 ### `children` function arguments
 
