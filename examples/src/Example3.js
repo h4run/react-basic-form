@@ -2,19 +2,14 @@ import React from 'react';
 
 import Form from '../../src';
 
-const Example2 = () => (
+const Example3 = () => (
   <Form onSubmit={data => console.log(data)}>
     {({ showErrorMessage, onChange, isLoading }) => (
       <>
         <div className="form-element">
-          <label>Ad</label>
-          <input name="name" type="text" onChange={onChange} required />
-          {showErrorMessage('name')}
-        </div>
-        <div className="form-element">
-          <label>Soyad</label>
-          <input name="surname" type="text" onChange={onChange} required />
-          {showErrorMessage('surname')}
+          <label>Full Name</label>
+          <input name="fullname" type="text" onChange={onChange} required />
+          {showErrorMessage('fullname')}
         </div>
         <button type="submit" disabled={isLoading}>
           Send
@@ -24,4 +19,4 @@ const Example2 = () => (
   </Form>
 );
 
-export default Example2;
+export default Example3;

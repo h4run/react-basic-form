@@ -33,5 +33,6 @@ module.exports = {
     'jsx-a11y/anchor-has-content': 0,
     'jsx-a11y/label-has-for': 0,
     'jsx-a11y/label-has-associated-control': 0,
+    'react/require-default-props': 0,
   },
 };

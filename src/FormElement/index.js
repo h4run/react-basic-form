@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 import { Context, convertOptions } from '../utils';
 
@@ -38,7 +39,7 @@ class FormElement extends React.Component {
 
   renderInput() {
     const { options, type } = this.props;
-    const { label, showErrorMessage, ...fieldProps } = this.props;
+    const { label, ...fieldProps } = this.props;
     const { onChange } = this.context;
     let props = {
       ...fieldProps,
@@ -71,7 +72,7 @@ class FormElement extends React.Component {
     } = this.props;
     const { showErrorMessage } = this.context;
 
-    if (children && typeof children === 'function') return children(this.context);
+    if (children) return typeof children === 'function' ? children(this.context) : children;
     return (
       <div className={cx('form-element', className)}>
         {label && (['checkbox', 'radio'].includes(type) ? options : true) && (
@@ -84,8 +85,18 @@ class FormElement extends React.Component {
   }
 }
 
-FormElement.defaultProps = {
-  required: false,
+FormElement.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.string,
+      }),
+    ]),
+  ),
+  label: PropTypes.string,
 };
 
 export default FormElement;

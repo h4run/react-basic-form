@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 
 import { getFormNames, Context } from './utils';
 
@@ -142,6 +143,11 @@ Form.defaultProps = {
   errorMessages: {},
   validations: {},
   defaultErrorMessage: 'This field is required.',
+};
+Form.propTypes = {
+  errorMessages: PropTypes.object,
+  validations: PropTypes.object,
+  defaultErrorMessage: PropTypes.string,
 };
 
 export default Form;

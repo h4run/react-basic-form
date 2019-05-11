@@ -1,56 +1,51 @@
 import React from 'react';
-import { isTCNumber, emailRegex, mobilePhoneTurkeyRegex } from './utils';
+import { emailRegex } from './utils';
 
 import Form from '../../src';
 
 const Example1 = () => (
   <Form
     onSubmit={(data, submitState) => {
-      submitState.start();
+      submitState.start(); // isLoading true
       setTimeout(() => {
         console.log(data);
-        submitState.end();
+        submitState.end(); // form reset && isLoading = false
       }, 1000);
     }}
     validations={{
-      phone: value => mobilePhoneTurkeyRegex.test(value),
       email: value => emailRegex.test(value),
-      idnumber: value => isTCNumber(value),
     }}
     errorMessages={{
-      phone: 'Lütfen cep telefonu numarasını kontrol ediniz.',
-      email: 'Lütfen e-posta adresinizi kontrol ediniz.',
-      idnumber: 'Lütfen kimlik numaranızı kontrol ediniz.',
+      email: 'Please check your email address.',
     }}
   >
-    <Form.Element label="Ad Soyad" name="fullname" required={false} />
-    <Form.Element label="E-posta" name="email" type="email" required={false} />
+    <Form.Element label="Full Name" name="fullname" required />
+    <Form.Element label="E-mail" name="email" type="email" required />
     <Form.Element
-      label="Cinsiyet"
-      name="cinsiyet"
+      label="Gender"
+      name="gender"
       type="radio"
-      options={[{ label: 'Erkek', value: 'm' }, { label: 'Kadın', value: 'f' }]}
-      // defaultValue="m"
-      required={false}
+      options={[{ label: 'Male', value: 'm' }, { label: 'Female', value: 'f' }]}
+      // options={['Male', 'Female']}
+      required
     />
     <Form.Element
-      label="Sevdiğin Renkler"
-      name="yourcolors"
+      label="Favorite Colors"
+      name="favorite_colors"
       type="checkbox"
       options={['Blue', 'Red', 'Green', 'Yellow']}
       // defaultValue={['Blue', 'Green']}
-      required={false}
+      // defaultValue="Blue"
+      required
     />
-    <Form.Element label="T.C. Kimlik No" name="idnumber" required={false} />
     <Form.Element
-      label="İl"
-      name="city"
+      label="Select a number from 1 to 10"
+      name="your_number"
       type="select"
-      options={['İSTANBUL', 'ANKARA']}
-      required={false}
+      options={[...Array.from(Array(10)).map((c, i) => i + 1)]}
+      required
     />
-    <Form.Element label="Telefon" name="phone" required={false} />
-    <Form.Element label="Mesaj" name="message" type="textarea" required={false} />
+    <Form.Element label="Message" name="message" type="textarea" required />
     <Form.Submit />
   </Form>
 );

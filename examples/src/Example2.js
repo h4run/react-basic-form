@@ -7,7 +7,7 @@ const Example2 = () => (
     <Form.Element>
       {({ showErrorMessage, onChange }) => (
         <div className="form-element">
-          <label>Ad Soyad</label>
+          <label>Full Name</label>
           <input name="fullname" type="text" onChange={onChange} required />
           {showErrorMessage('fullname')}
         </div>

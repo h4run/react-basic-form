@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Select = ({
   options, children, addEmptyOption, emptyOptionLabel, ...props
@@ -16,5 +17,6 @@ const Select = ({
 );
 
 Select.defaultProps = { addEmptyOption: true, emptyOptionLabel: 'Select' };
+Select.propTypes = { addEmptyOption: PropTypes.bool, emptyOptionLabel: PropTypes.string };
 
 export default Select;

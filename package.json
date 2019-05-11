@@ -1,6 +1,6 @@
 {
   "name": "react-basic-form",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "React form builder",
   "main": "dist/index.js",
   "scripts": {
@@ -37,7 +37,8 @@
     "react-dom": ">=16"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
