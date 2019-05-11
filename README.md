@@ -32,9 +32,7 @@ import Form from 'react-basic-form';
 
 render(
   <Form
-    onSubmit={data => {
-      console.log(data);
-    }}
+    onSubmit={data => console.log(data)}
     validations={{
       email: value => emailRegex.test(value),
     }}
