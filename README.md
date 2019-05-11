@@ -60,7 +60,7 @@ render(
     <Form.Element>
       {({ showErrorMessage, onChange }) => (
         <div>
-          <input name="fullname" type="text" onChange={onChange} required />
+          <input name="fullname" type="text" onChange={onChange} placeholder="Full Name" required />
           {showErrorMessage('fullname')}
         </div>
       )}
@@ -89,7 +89,7 @@ render(
     {({ showErrorMessage, onChange, isLoading }) => (
       <div>
         <div>
-          <input name="fullname" type="text" onChange={onChange} required />
+          <input name="fullname" type="text" onChange={onChange} placeholder="Full Name" required />
           {showErrorMessage('fullname')}
         </div>
         <button type="submit" disabled={isLoading}>
