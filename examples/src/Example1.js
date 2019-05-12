@@ -42,7 +42,7 @@ const Example1 = () => (
       label="Select a number from 1 to 10"
       name="your_number"
       type="select"
-      options={[...Array.from(Array(10)).map((c, i) => i + 1)]}
+      options={Array.from({ length: 10 }, (c, i) => i + 1)}
       required
     />
     <Form.Element label="Message" name="message" type="textarea" required />
