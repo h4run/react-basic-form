@@ -46,7 +46,7 @@ class FormElement extends React.Component {
       onChange: (e) => {
         onChange(e);
         if (fieldProps.onChange) {
-          fieldProps.onChange();
+          fieldProps.onChange(e);
         }
       },
       id: this.getID(),
