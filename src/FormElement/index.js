@@ -43,7 +43,12 @@ class FormElement extends React.Component {
     const { onChange } = this.context;
     let props = {
       ...fieldProps,
-      onChange,
+      onChange: (e) => {
+        onChange(e);
+        if (fieldProps.onChange) {
+          fieldProps.onChange();
+        }
+      },
       id: this.getID(),
     };
 

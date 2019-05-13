@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 
 import { Context } from './utils';
 
-const FormSubmit = ({ children, label, loadingLabel }) => (
+const FormSubmit = ({
+  children, label, loadingLabel, ...props
+}) => (
   <Context.Consumer>
     {(context) => {
       if (children) return typeof children === 'function' ? children(context) : children;
 
       const { isLoading } = context;
       return (
-        <button type="submit" disabled={isLoading}>
+        <button type="submit" disabled={isLoading} {...props}>
           {(isLoading && loadingLabel) || label}
         </button>
       );
