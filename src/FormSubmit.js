@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Context } from './utils';
 
 const FormSubmit = ({
-  children, label, loadingLabel, ...props
+  children, text, loadingText, ...props
 }) => (
   <Context.Consumer>
     {(context) => {
@@ -13,7 +13,7 @@ const FormSubmit = ({
       const { isLoading } = context;
       return (
         <button type="submit" disabled={isLoading} {...props}>
-          {(isLoading && loadingLabel) || label}
+          {(isLoading && loadingText) || text}
         </button>
       );
     }}
@@ -21,12 +21,12 @@ const FormSubmit = ({
 );
 
 FormSubmit.defaultProps = {
-  label: 'Send',
-  loadingLabel: 'Sending',
+  text: 'Send',
+  loadingText: 'Sending',
 };
 FormSubmit.propTypes = {
-  label: PropTypes.string,
-  loadingLabel: PropTypes.string,
+  text: PropTypes.string,
+  loadingText: PropTypes.string,
 };
 
 export default FormSubmit;

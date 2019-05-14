@@ -132,35 +132,35 @@ render(
 
 | Name                | Type                        | Default                     | Description                                                                                           |
 | ------------------- | --------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| onSubmit            | (values, submitState) => {} |                             | form submission handler.                                                                              |
-| validations         | Object                      | `{}`                        | contains validators for each field.                                                                   |
-| errorMessages       | Object                      | `{}`                        | contains error message for each field.                                                                |
-| defaultErrorMessage | string                      | `'This field is required.'` | contains error message for all field.                                                                 |
-| children            | React.Node or function      |                             | if children is a function this function should return the JSX which contains the form and all inputs. |
+| onSubmit            | (values, submitState) => {} |                             | form submission handler                                                                               |
+| validations         | Object                      | `{}`                        | validation rules for each form field                                                                  |
+| errorMessages       | Object                      | `{}`                        | error messages for each form field                                                                    |
+| defaultErrorMessage | string                      | `'This field is required.'` | default error message for form fields without defined error message                                   |
+| children            | React.Node or function      |                             | if children is a function, this function should return the JSX which contains the form and all inputs |
 
 ### `Form.Element` props
 
 | Name     | Type                                          | Default | Description                                                                                           |
 | -------- | --------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| options  | Array(string) or Array(shape({label, value})) |         | when if `type` prop includes `select`,`radio` or `checkbox`, this prop is required                    |
-| label    | string                                        |         | if this filled, `Form.Element` will create `label` tag with your string.                              |
-| children | React.Node or function                        |         | if children is a function this function should return the JSX which contains the form and all inputs. |
+| options  | Array(string) or Array(shape({label, value})) |         | if `type` prop includes `select`,`radio` or `checkbox`, this prop is required                         |
+| label    | string                                        |         | if this prop is filled, `Form.Element` will create a `label` tag with this string                     |
+| children | React.Node or function                        |         | if children is a function, this function should return the JSX which contains the form and all inputs |
 
 ### `Form.Submit` props
 
-| Name         | Type                   | Default     | Description                                                                                           |
-| ------------ | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
-| label        | string                 | `'Send'`    |                                                                                                       |
-| loadingLabel | string                 | `'Sending'` |                                                                                                       |
-| children     | React.Node or function |             | if children is a function this function should return the JSX which contains the form and all inputs. |
+| Name        | Type                   | Default     | Description                                                                                           |
+| ----------- | ---------------------- | ----------- | ----------------------------------------------------------------------------------------------------- |
+| text        | string                 | `'Send'`    | button text of the form                                                                               |
+| loadingText | string                 | `'Sending'` | button text of the form when submit state is loading                                                  |
+| children    | React.Node or function |             | if children is a function, this function should return the JSX which contains the form and all inputs |
 
 ### `children` function arguments
 
-| Name             | Type     | Description |
-| ---------------- | -------- | ----------- |
-| showErrorMessage | function |             |
-| onChange         | function |             |
-| isLoading        | boolean  |             |
+| Name             | Type     | Description                                                              |
+| ---------------- | -------- | ------------------------------------------------------------------------ |
+| showErrorMessage | function | it takes form name as an argument and shows error message for this field |
+| onChange         | function | function that controls validation errors on field value change           |
+| isLoading        | boolean  | show submit state condition whether it's loading or not                  |
 
 ## Development
 
