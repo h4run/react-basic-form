@@ -18,7 +18,7 @@ class Form extends React.Component {
   };
 
   _handleSubmit = (e) => {
-    e.preventDefault();
+    console.log('handle submit')
     const { isLoading } = this.state;
     if (isLoading) return;
 
@@ -51,6 +51,10 @@ class Form extends React.Component {
     const errorMessage = errorMessages[name] || defaultErrorMessage;
     if (this.hasError(name)) return <div className="error-message">{errorMessage}</div>;
   };
+
+  submit = () => {
+    this.form.dispatchEvent(new Event('submit'));
+  }
 
   isValidAll(form, names) {
     return names.reduce((isValid, name) => {
@@ -131,6 +135,9 @@ class Form extends React.Component {
           noValidate
           className={cx('react-basic-form', className)}
           {...props}
+          ref={(n) => {
+            this.form = n
+          }}
         >
           {typeof children === 'function' ? children(contextProps) : children}
         </form>
