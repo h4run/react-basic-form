@@ -18,11 +18,10 @@ class Form extends React.Component {
   };
 
   _handleSubmit = (e) => {
-    console.log('handle submit')
-    const { isLoading } = this.state;
+    const { isLoading, errors } = this.state;
     if (isLoading) return;
 
-    const { onSubmit } = this.props;
+    const { onSubmit, errorOnSubmit } = this.props;
     const form = e.target;
     const names = getFormNames(form);
 
@@ -42,6 +41,8 @@ class Form extends React.Component {
       if (onSubmit) {
         onSubmit(data, submitActions);
       }
+    } else if (errorOnSubmit) {
+      errorOnSubmit(errors);
     }
   };
 
