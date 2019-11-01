@@ -18,6 +18,7 @@ class Form extends React.Component {
   };
 
   _handleSubmit = (e) => {
+    e.preventDefault();
     const { isLoading, errors } = this.state;
     if (isLoading) return;
 
@@ -137,7 +138,7 @@ class Form extends React.Component {
           className={cx('react-basic-form', className)}
           {...props}
           ref={(n) => {
-            this.form = n
+            this.form = n;
           }}
         >
           {typeof children === 'function' ? children(contextProps) : children}
