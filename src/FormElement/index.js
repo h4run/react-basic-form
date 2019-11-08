@@ -39,7 +39,7 @@ class FormElement extends React.Component {
 
   renderInput() {
     const { options, type } = this.props;
-    const { label, ...fieldProps } = this.props;
+    const { label, inputRef, ...fieldProps } = this.props;
     const { onChange } = this.context;
     let props = {
       ...fieldProps,
@@ -63,6 +63,13 @@ class FormElement extends React.Component {
       props = {
         ...props,
         label,
+      };
+    }
+
+    if (inputRef) {
+      props = {
+        ...props,
+        ref: inputRef,
       };
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = props => <input {...props} />;
+const Input = React.forwardRef((props, ref) => <input {...props} ref={ref} />);
 
 Input.defaultProps = {
   type: 'text',

@@ -13,13 +13,20 @@ const Example1 = () => (
       }, 1000);
     }}
     validations={{
-      email: value => emailRegex.test(value),
+      email: (value) => emailRegex.test(value),
     }}
     errorMessages={{
       email: 'Please check your email address.',
     }}
   >
-    <Form.Element label="Full Name" name="fullname" required />
+    <Form.Element
+      inputRef={(n) => {
+        console.log(n);
+      }}
+      label="Full Name"
+      name="fullname"
+      required
+    />
     <Form.Element label="E-mail" name="email" type="email" required />
     <Form.Element
       label="Gender"
