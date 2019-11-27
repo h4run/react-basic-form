@@ -39,8 +39,10 @@ class FormElement extends React.Component {
 
   renderInput() {
     const { options, type } = this.props;
-    const { label, inputRef, ...fieldProps } = this.props;
-    const { onChange } = this.context;
+    const {
+      label, inputRef, className, inputClassname, ...fieldProps
+    } = this.props;
+    const { onChange, isValid } = this.context;
     let props = {
       ...fieldProps,
       onChange: (e) => {
@@ -48,9 +50,16 @@ class FormElement extends React.Component {
         if (fieldProps.onChange) {
           fieldProps.onChange(e);
         }
+        if (fieldProps.validateOnChange) {
+          fieldProps.validateOnChange(isValid(e.target));
+        }
       },
       id: this.getID(),
     };
+
+    if (inputClassname) {
+      props = { ...props, className: inputClassname };
+    }
 
     if (type === 'select' || (['checkbox', 'radio'].includes(type) && options)) {
       props = {

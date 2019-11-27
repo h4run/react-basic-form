@@ -20,14 +20,16 @@ const Example1 = () => (
     }}
   >
     <Form.Element
-      inputRef={(n) => {
-        console.log(n);
-      }}
       label="Full Name"
       name="fullname"
       required
     />
-    <Form.Element label="E-mail" name="email" type="email" required />
+    <Form.Element
+      label="E-mail"
+      name="email"
+      type="email"
+      required
+    />
     <Form.Element
       label="Gender"
       name="gender"

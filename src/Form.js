@@ -13,7 +13,7 @@ class Form extends React.Component {
     const { name, value, required } = e.target;
 
     if (this.hasError(name)) {
-      this.isValid({ name, value, required });
+      this.isValid({ name, value, required }, true);
     }
   };
 
@@ -68,7 +68,7 @@ class Form extends React.Component {
           name,
           value: element.type === 'checkbox' ? element.checked : element.value,
           required: formElement.required,
-        }) && isValid
+        }, true) && isValid
       );
     }, true);
   }
@@ -80,17 +80,17 @@ class Form extends React.Component {
 
   addError(name) {
     if (!this.hasError(name)) {
-      this.setState(prevState => ({ errors: [...prevState.errors, name] }));
+      this.setState((prevState) => ({ errors: [...prevState.errors, name] }));
     }
   }
 
   removeError(name) {
     if (this.hasError(name)) {
-      this.setState(prevState => ({ errors: prevState.errors.filter(e => e !== name) }));
+      this.setState((prevState) => ({ errors: prevState.errors.filter((e) => e !== name) }));
     }
   }
 
-  isValid({ name, value, required }) {
+  isValid = ({ name, value, required }, setState) => {
     const { validations } = this.props;
     let defaultFieldIsValid = true;
 
@@ -106,8 +106,10 @@ class Form extends React.Component {
 
     const isValid = defaultFieldIsValid && customFieldIsValid;
 
-    if (isValid) this.removeError(name);
-    else this.addError(name);
+    if (setState) {
+      if (isValid) this.removeError(name);
+      else this.addError(name);
+    }
 
     return isValid;
   }
@@ -128,6 +130,7 @@ class Form extends React.Component {
     const contextProps = {
       showErrorMessage: this._showErrorMessage,
       onChange: this._handleChange,
+      isValid: this.isValid,
       isLoading,
     };
     return (
